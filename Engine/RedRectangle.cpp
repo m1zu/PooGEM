@@ -4,7 +4,7 @@
 
 RedRectangle::RedRectangle()
 	:
-	rng(rd()),
+	rng(std::random_device()()),
 	xDist(0, Graphics::ScreenWidth - width - 20),
 	yDist(0, Graphics::ScreenHeight - height)
 {

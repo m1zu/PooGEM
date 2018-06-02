@@ -23,7 +23,6 @@ private:
 
 	RedRectBar bar;
 
-	std::random_device rd;
 	std::mt19937 rng;
 	std::uniform_int_distribution<int> xDist;
 	std::uniform_int_distribution<int> yDist;

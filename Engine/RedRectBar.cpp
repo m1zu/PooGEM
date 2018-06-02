@@ -1,16 +1,5 @@
 #include "RedRectBar.h"
 
-
-
-RedRectBar::RedRectBar()
-{
-}
-
-
-RedRectBar::~RedRectBar()
-{
-}
-
 void RedRectBar::Increment()
 {
 	if (barOmeter < 20)

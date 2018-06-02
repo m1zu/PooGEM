@@ -12,15 +12,15 @@ public:
 	void ClampToScreen();
 	void Draw(Graphics& gfx) const;
 
-	int GetX() const;
-	int GetY() const;
+	float GetX() const;
+	float GetY() const;
 
 public:
-	static constexpr int width = 20;
-	static constexpr int height = 20;
+	static constexpr float width = 20.0f;
+	static constexpr float height = 20.0f;
 
 private:
-	int x = 390;
-	int y = 290;
+	float x = 390.0f;
+	float y = 290.0f;
 };
 

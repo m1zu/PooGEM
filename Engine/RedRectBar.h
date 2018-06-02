@@ -5,9 +5,6 @@
 class RedRectBar
 {
 public:
-	RedRectBar();
-	~RedRectBar();
-
 	void Increment();
 	void Draw(Graphics& gfx, int colorCounter) const;
 

@@ -28,11 +28,12 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	pix( gfx )
 {
-	std::mt19937 rng;
-	std::uniform_int_distribution<int> distX(0, gfx.ScreenWidth - Poo::width);
-	std::uniform_int_distribution<int> distY(0, gfx.ScreenHeight - Poo::height);
-	std::uniform_int_distribution<int> distVx(0, 3);
-	std::uniform_int_distribution<int> distVy(0, 3);
+	std::random_device rd;
+	std::mt19937 rng(rd());
+	std::uniform_real_distribution<float> distX(0.0f, float(gfx.ScreenWidth) - Poo::width);
+	std::uniform_real_distribution<float> distY(0.0f, float(gfx.ScreenHeight) - Poo::height);
+	std::uniform_real_distribution<float> distVx(-3.0f, 3.0f);
+	std::uniform_real_distribution<float> distVy(-3.0f, 3.0f);
 	for (int i = 0; i < nPoos; ++i) {
 		poo[i].Init(distX(rng), distY(rng), distVx(rng), distVy(rng));
 	}
