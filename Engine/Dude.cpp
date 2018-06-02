@@ -6,10 +6,10 @@ Dude::Dude()
 
 void Dude::Control(const int up, const int down, const int left, const int right)
 {
-	if (up) y -= 2;
-	if (down) y += 2;
-	if (left) x -= 2;
-	if (right) x += 2;
+	if (up) y -= 2.0f;
+	if (down) y += 2.0f;
+	if (left) x -= 2.0f;
+	if (right) x += 2.0f;
 	ClampToScreen();
 }
 

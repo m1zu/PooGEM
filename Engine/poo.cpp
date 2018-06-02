@@ -29,19 +29,19 @@ void Poo::update(const Dude& dude)
 
 	if (x < 0) {
 		x = 0;
-		vx == 0 ? 0 : vx = -vx;
+		vx = -vx;
 	}
-	if (x + width - 1 > Graphics::ScreenWidth - 1) {
+	if (x + width > Graphics::ScreenWidth) {
 		x = Graphics::ScreenWidth - width;
-		vx == 0 ? 0 : vx = -vx;
+		vx = -vx;
 	}
 	if (y < 0) {
 		y = 0;
-		vy == 0 ? 0 : vy = -vy;
+		vy = -vy;
 	}
-	if (y + height - 1 > Graphics::ScreenHeight - 1) {
+	if (y + height > Graphics::ScreenHeight) {
 		y = Graphics::ScreenHeight - height;
-		vy == 0 ? 0 : vy = -vy;
+		vy = -vy;
 	}
 
 	testCollision(dude);
