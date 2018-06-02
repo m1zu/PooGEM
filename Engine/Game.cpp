@@ -32,8 +32,8 @@ Game::Game( MainWindow& wnd )
 	std::mt19937 rng(rd());
 	std::uniform_real_distribution<float> distX(0.0f, float(gfx.ScreenWidth) - Poo::width);
 	std::uniform_real_distribution<float> distY(0.0f, float(gfx.ScreenHeight) - Poo::height);
-	std::uniform_real_distribution<float> distVx(-3.0f, 3.0f);
-	std::uniform_real_distribution<float> distVy(-3.0f, 3.0f);
+	std::uniform_real_distribution<float> distVx(-180.0f, 180.0f);
+	std::uniform_real_distribution<float> distVy(-180.0f, 180.0f);
 	for (int i = 0; i < nPoos; ++i) {
 		poo[i].Init(distX(rng), distY(rng), distVx(rng), distVy(rng));
 	}
@@ -49,12 +49,13 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	const float dt = frameTimer.Mark();
 	if (wnd.kbd.KeyIsPressed(VK_RETURN))
 		gameIsStarted = true;
 
 	if (gameIsStarted) {
-		controlCharacter();
-		processPoos();
+		controlCharacter(dt);
+		processPoos(dt);
 		redRec.Update(dude);
 		testGameOver();
 	}
@@ -82,18 +83,18 @@ void Game::ComposeFrame()
 		pix.drawStart(320, 200);
 }
 
-void Game::controlCharacter()
+void Game::controlCharacter(const float dt)
 {
 	const int left = wnd.kbd.KeyIsPressed(VK_LEFT);
 	const int right = wnd.kbd.KeyIsPressed(VK_RIGHT);
 	const int up = wnd.kbd.KeyIsPressed(VK_UP);
 	const int down = wnd.kbd.KeyIsPressed(VK_DOWN);
-	dude.Control(up, down, left, right);
+	dude.Control(up, down, left, right, dt);
 }
 
-void Game::processPoos() {
+void Game::processPoos(const float dt) {
 	for (int i = 0; i < nPoos; ++i) {
-		poo[i].update(dude);
+		poo[i].update(dude, dt);
 	}
 }
 

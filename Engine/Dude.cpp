@@ -4,12 +4,12 @@ Dude::Dude()
 {
 }
 
-void Dude::Control(const int up, const int down, const int left, const int right)
+void Dude::Control(const int up, const int down, const int left, const int right, const float dt)
 {
-	if (up) y -= 2.0f;
-	if (down) y += 2.0f;
-	if (left) x -= 2.0f;
-	if (right) x += 2.0f;
+	if (up) y -= 120.0f * dt;
+	if (down) y += 120.0f * dt;
+	if (left) x -= 120.0f * dt;
+	if (right) x += 120.0f * dt;
 	ClampToScreen();
 }
 

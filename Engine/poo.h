@@ -9,7 +9,7 @@ public:
 	Poo();
 
 	void Init(const float in_x, const float in_y, const float in_vx, const float in_vy);
-	void update(const Dude& dude);
+	void update(const Dude& dude, const float dt);
 	bool IsEaten() const;
 	void draw(Graphics& gfx);
 

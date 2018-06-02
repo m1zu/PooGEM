@@ -27,6 +27,7 @@
 #include "Dude.h"
 #include "PutPixelDrawer.h"
 #include "RedRectangle.h"
+#include "FrameTimer.h"
 
 class Game
 {
@@ -40,8 +41,8 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
-	void controlCharacter();
-	void processPoos();
+	void controlCharacter(const float dt);
+	void processPoos(const float dt);
 	void testGameOver();
 	/********************************/
 private:
@@ -49,6 +50,7 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	FrameTimer frameTimer;
 	bool gameIsStarted = false;
 	bool gameIsOver = false;
 	Dude dude;

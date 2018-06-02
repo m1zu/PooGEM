@@ -11,8 +11,8 @@ void Poo::Init(const float in_x, const float in_y, const float in_vx, const floa
 	initialized = true;
 	assert(int(in_x) > 0 || int(in_x) < Graphics::ScreenWidth - width);
 	assert(int(in_y) > 0 || int(in_y) < Graphics::ScreenHeight - height);
-	assert(in_vx > -5.0f || in_vx < 5.0f);
-	assert(in_vy > -5.0f || in_vy < 5.0f);
+	assert(in_vx > -400.0f || in_vx < 400.0f);
+	assert(in_vy > -400.0f || in_vy < 400.0f);
 
 	x = in_x;
 	y = in_y;
@@ -20,12 +20,12 @@ void Poo::Init(const float in_x, const float in_y, const float in_vx, const floa
 	vy = in_vy;
 }
 
-void Poo::update(const Dude& dude)
+void Poo::update(const Dude& dude, const float dt)
 {
 	assert(initialized);
 
-	x += vx;
-	y += vy;
+	x += vx * dt;
+	y += vy * dt;
 
 	if (x < 0) {
 		x = 0;

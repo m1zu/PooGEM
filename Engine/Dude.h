@@ -8,7 +8,7 @@ class Dude
 public:
 	Dude();
 
-	void Control(const int up, const int down, const int left, const int right);
+	void Control(const int up, const int down, const int left, const int right, const float dt);
 	void ClampToScreen();
 	void Draw(Graphics& gfx) const;
 
