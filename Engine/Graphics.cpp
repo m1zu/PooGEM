@@ -318,9 +318,10 @@ void Graphics::PutPixel( int x,int y,Color c )
 
 void Graphics::drawCircle(int x0, int y0, int r, Color c)
 {
+	const int r_sq = r * r;
 	for (int x = x0 - r; x <= x0 + r; ++x)
 		for (int y = y0 - r; y <= y0 + r; ++y)
-			if ((x - x0)*(x - x0) + (y - y0)*(y - y0) < r*r)
+			if ((x - x0)*(x - x0) + (y - y0)*(y - y0) < r_sq)
 				if (x >= 0 && x < ScreenWidth && y >= 0 && y < ScreenHeight)
 					PutPixel(x, y, c);
 }
