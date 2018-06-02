@@ -67,12 +67,15 @@ void Game::ComposeFrame()
 		if (gameIsOver)
 			pix.drawGameOver(320, 240);
 		else {
-			redRec.Draw(gfx);
 			dude.Draw(gfx);
 			for (int i = 0; i < nPoos; ++i)
 			{
 				if (!poo[i].IsEaten()) poo[i].draw(gfx);
 			}
+			gfx.drawCircle(30, 30, 60, Colors::Gray);
+			gfx.drawCircle(750, 300, 80, Colors::Gray);
+			gfx.drawCircle(200, 500, 30, Colors::Gray);
+			redRec.Draw(gfx);
 		}
 	}
 	else
