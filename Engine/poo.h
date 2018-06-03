@@ -2,13 +2,14 @@
 
 #include "Dude.h"
 #include "Graphics.h"
+#include "Vec2D.h"
 
 class Poo
 {
 public:
 	Poo();
 
-	void Init(const float in_x, const float in_y, const float in_vx, const float in_vy);
+	void Init(const Vec2D& pos_in, const Vec2D& vel_in);
 	void update(const Dude& dude, const float dt);
 	bool IsEaten() const;
 	void draw(Graphics& gfx);
@@ -21,8 +22,8 @@ public:
 	static constexpr float height = 24;
 
 private:
-	float x, y;
-	float vx, vy;
+	Vec2D position;
+	Vec2D velocity;
 	bool isEaten = false;
 	bool initialized = false;
 };

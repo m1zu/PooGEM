@@ -21,6 +21,7 @@
 #include "MainWindow.h"
 #include "Game.h"
 #include <random>
+#include "Vec2D.h"
 
 Game::Game( MainWindow& wnd )
 	:
@@ -35,7 +36,7 @@ Game::Game( MainWindow& wnd )
 	std::uniform_real_distribution<float> distVx(-180.0f, 180.0f);
 	std::uniform_real_distribution<float> distVy(-180.0f, 180.0f);
 	for (int i = 0; i < nPoos; ++i) {
-		poo[i].Init(distX(rng), distY(rng), distVx(rng), distVy(rng));
+		poo[i].Init( Vec2D(distX(rng), distY(rng)), Vec2D(distVx(rng), distVy(rng)));
 	}
 }
 
@@ -85,11 +86,18 @@ void Game::ComposeFrame()
 
 void Game::controlCharacter(const float dt)
 {
+	/*
 	const int left = wnd.kbd.KeyIsPressed(VK_LEFT);
 	const int right = wnd.kbd.KeyIsPressed(VK_RIGHT);
 	const int up = wnd.kbd.KeyIsPressed(VK_UP);
 	const int down = wnd.kbd.KeyIsPressed(VK_DOWN);
-	dude.Control(up, down, left, right, dt);
+	dude.ControlKeyboard(up, down, left, right, dt);
+	*/
+
+	if (wnd.mouse.LeftIsPressed()) {
+		const Vec2D pointerPos(float(wnd.mouse.GetPosX()), float(wnd.mouse.GetPosY()));
+		dude.ControlMouse(pointerPos,dt);
+	}
 }
 
 void Game::processPoos(const float dt) {

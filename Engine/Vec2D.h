@@ -18,9 +18,7 @@ public:
 	Vec2D GetNormalized();
 	Vec2D& Normalize();
 
-
-
-private:
+public:
 	float x;
 	float y;
 };

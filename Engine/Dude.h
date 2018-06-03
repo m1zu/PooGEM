@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Graphics.h"
+#include "Vec2D.h"
 
 
 class Dude
@@ -8,7 +9,8 @@ class Dude
 public:
 	Dude();
 
-	void Control(const int up, const int down, const int left, const int right, const float dt);
+	void ControlKeyboard(const int up, const int down, const int left, const int right, const float dt);
+	void ControlMouse(const Vec2D& pointerPos, const float dt);
 	void ClampToScreen();
 	void Draw(Graphics& gfx) const;
 
@@ -18,9 +20,9 @@ public:
 public:
 	static constexpr float width = 20.0f;
 	static constexpr float height = 20.0f;
+	static constexpr float velocity = 120.0f;
 
 private:
-	float x = 390.0f;
-	float y = 290.0f;
+	Vec2D position;
 };
 

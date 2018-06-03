@@ -5,43 +5,40 @@ Poo::Poo()
 {
 }
 
-void Poo::Init(const float in_x, const float in_y, const float in_vx, const float in_vy)
+void Poo::Init( const Vec2D& pos_in, const Vec2D& vel_in)
 {
 	assert(!initialized);
 	initialized = true;
-	assert(int(in_x) > 0 || int(in_x) < Graphics::ScreenWidth - width);
-	assert(int(in_y) > 0 || int(in_y) < Graphics::ScreenHeight - height);
-	assert(in_vx > -400.0f || in_vx < 400.0f);
-	assert(in_vy > -400.0f || in_vy < 400.0f);
+	assert(int(pos_in.x) > 0 || int(pos_in.x) < Graphics::ScreenWidth - width);
+	assert(int(pos_in.y) > 0 || int(pos_in.y) < Graphics::ScreenHeight - height);
+	assert(vel_in.x > -400.0f || vel_in.x < 400.0f);
+	assert(vel_in.y > -400.0f || vel_in.y < 400.0f);
 
-	x = in_x;
-	y = in_y;
-	vx = in_vx;
-	vy = in_vy;
+	position = pos_in;
+	velocity = vel_in;
 }
 
 void Poo::update(const Dude& dude, const float dt)
 {
 	assert(initialized);
 
-	x += vx * dt;
-	y += vy * dt;
+	position += velocity * dt;
 
-	if (x < 0) {
-		x = 0;
-		vx = -vx;
+	if (position.x < 0) {
+		position.x = 0;
+		velocity.x *= -1.0f;
 	}
-	if (x + width > Graphics::ScreenWidth) {
-		x = Graphics::ScreenWidth - width;
-		vx = -vx;
+	if (position.x + width > Graphics::ScreenWidth) {
+		position.x = Graphics::ScreenWidth - width;
+		velocity.x *= -1.0f;
 	}
-	if (y < 0) {
-		y = 0;
-		vy = -vy;
+	if (position.y < 0) {
+		position.y = 0;
+		velocity.y *= -1.0f;
 	}
-	if (y + height > Graphics::ScreenHeight) {
-		y = Graphics::ScreenHeight - height;
-		vy = -vy;
+	if (position.y + height > Graphics::ScreenHeight) {
+		position.y = Graphics::ScreenHeight - height;
+		velocity.y *= -1.0f;
 	}
 
 	testCollision(dude);
@@ -55,18 +52,18 @@ bool Poo::IsEaten() const
 
 void Poo::testCollision(const Dude& dude)
 {
-	if (x + width - 1.0f > dude.GetX()
-		&& x < dude.GetX() + dude.width - 1.0f
-		&& y + height - 1.0f > dude.GetY()
-		&& y < dude.GetY() + dude.height - 1.0f)
+	if (position.x + width - 1.0f > dude.GetX()
+		&& position.x < dude.GetX() + dude.width - 1.0f
+		&& position.y + height - 1.0f > dude.GetY()
+		&& position.y < dude.GetY() + dude.height - 1.0f)
 
 		isEaten = true;
 }
 
 void Poo::draw(Graphics & gfx)
 {
-	int int_x = int(x);
-	int int_y = int(y);
+	int int_x = int(position.x);
+	int int_y = int(position.y);
 	gfx.PutPixel(14 + int_x, 0 + int_y, 138, 77, 0);
 	gfx.PutPixel(7 + int_x, 1 + int_y, 138, 77, 0);
 	gfx.PutPixel(13 + int_x, 1 + int_y, 138, 77, 0);

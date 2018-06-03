@@ -1,38 +1,47 @@
 #include "Dude.h"
 
 Dude::Dude()
+	:
+	position(390, 290)
 {
 }
 
-void Dude::Control(const int up, const int down, const int left, const int right, const float dt)
+void Dude::ControlKeyboard(const int up, const int down, const int left, const int right, const float dt)
 {
-	if (up) y -= 120.0f * dt;
-	if (down) y += 120.0f * dt;
-	if (left) x -= 120.0f * dt;
-	if (right) x += 120.0f * dt;
+	if (up) position.y -= velocity * dt;
+	if (down) position.y += velocity * dt;
+	if (left) position.x -= velocity * dt;
+	if (right) position.x += velocity * dt;
+	ClampToScreen();
+}
+
+void Dude::ControlMouse(const Vec2D & pointerPos, const float dt)
+{
+	Vec2D movementDirection = ((position-pointerPos)*(-1)).Normalize();
+	position += movementDirection * velocity*dt;
 	ClampToScreen();
 }
 
 void Dude::ClampToScreen()
 {
-	if (x < 0) {
-		x = 0;
+	if (position.x < 0) {
+		position.x = 0;
 	}
-	if (x + width > Graphics::ScreenWidth) {
-		x = Graphics::ScreenWidth - width;
+	if (position.x + width > Graphics::ScreenWidth) {
+		position.x = Graphics::ScreenWidth - width;
 	}
-	if (y < 0) {
-		y = 0;
+	if (position.y < 0) {
+		position.y = 0;
 	}
-	if (y + height> Graphics::ScreenHeight) {
-		y = Graphics::ScreenHeight - height;
+	if (position.y + height> Graphics::ScreenHeight) {
+		position.y = Graphics::ScreenHeight - height;
 	}
 }
 
 void Dude::Draw(Graphics & gfx) const
 {
-	int int_x = int(x);
-	int int_y = int(y);
+	int int_x = int(position.x);
+	int int_y = int(position.y);
 	gfx.PutPixel(7 + int_x, 0 + int_y, 0, 0, 0);
 	gfx.PutPixel(8 + int_x, 0 + int_y, 0, 0, 0);
 	gfx.PutPixel(9 + int_x, 0 + int_y, 0, 0, 0);
@@ -353,11 +362,11 @@ void Dude::Draw(Graphics & gfx) const
 
 float Dude::GetX() const
 {
-	return x;
+	return position.x;
 }
 
 float Dude::GetY() const
 {
-	return y;
+	return position.y;
 }
 
